@@ -3,6 +3,7 @@
 #include <numa.h>
 
 #include <condition_variable>
+#include <functional>
 #include <fstream>
 #include <mutex>
 #include <thread>

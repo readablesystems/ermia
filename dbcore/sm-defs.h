@@ -134,7 +134,7 @@ static constexpr bool is_aligned(T val, U amount = DEFAULT_ALIGNMENT) {
  */
 template <int N>
 struct __attribute__((aligned(N))) aligner {
-  char _empty[];
+  char _empty[0];
 };
 
 // lest there be any confusion...
@@ -218,7 +218,7 @@ static inline void volatile_write(T volatile &x, U const &y) {
   SPAM(msg, ##__VA_ARGS__); \
   abort();
 
-#ifdef __GNUC__
+#if defined(__GNUC__) &&  __GNUC__ < 5
 /* GCC's offsetof() macro is broken in C++ for versions <= 4.9.0 when
    array indexes are not known at compile time.
 
