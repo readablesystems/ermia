@@ -46,11 +46,19 @@ int os_openat(int dfd, char const *fname, int flags) {
 }
 
 void os_write(int fd, void const *buf, size_t bufsz) {
+#if IN_MEMORY_ONLY
+  (void)fd; (void)buf; (void)bufsz;
+#else
   size_t err = write(fd, buf, bufsz);
   LOG_IF(FATAL, err != bufsz) << "Error writing " << bufsz << " bytes to file";
+#endif
 }
 
 size_t os_pwrite(int fd, char const *buf, size_t bufsz, off_t offset) {
+#if IN_MEMORY_ONLY
+  (void)fd; (void)buf; (void)offset;
+  return bufsz;
+#else
   size_t n = 0;
   while (n < bufsz) {
     ssize_t m = pwrite(fd, buf + n, bufsz - n, offset + n);
@@ -62,6 +70,7 @@ size_t os_pwrite(int fd, char const *buf, size_t bufsz, off_t offset) {
     n += m;
   }
   return n;
+#endif
 }
 
 size_t os_pread(int fd, char *buf, size_t bufsz, off_t offset) {
@@ -113,8 +122,12 @@ void os_unlinkat(int dfd, char const *fname, int flags) {
    platforms we support. For now, we just ignore the problem.
  */
 void os_fsync(int fd) {
+#if IN_MEMORY_ONLY
+  (void)fd;
+#else
   int err = fsync(fd);
   THROW_IF(err, os_error, errno, "Error synching fd %d to disk", fd);
+#endif
 }
 
 void os_close(int fd) {

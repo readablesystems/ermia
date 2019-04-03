@@ -13,6 +13,9 @@ link_libraries(${LINK_FLAGS})
 # Use masstree for index
 add_definitions(-DMASSTREE)
 
+# Bypass write system calls
+add_definitions(-DIN_MEMORY_ONLY=1)
+
 set(MASSTREE_CONFIG "--enable-max-key-len=1024 --with-malloc=malloc")
 
 if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
