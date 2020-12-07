@@ -7,6 +7,7 @@ if [ ! -d build ]; then
 	cd ..
 fi
 
+cd build
 /home/ubuntu/sto/mount_hugepages.sh 102400
-./run_scripts.sh
+./run_script.sh
 sudo shutdown -h +1
