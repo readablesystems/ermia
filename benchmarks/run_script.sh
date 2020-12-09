@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for w in 1 4
+for w in 1 4 0
 do
   OUTFILE="e-${w}w-results.txt"
   printf "# Threads" >> $OUTFILE
@@ -9,7 +9,7 @@ do
     printf ",ERMIA (W$w) [T$k]" >> $OUTFILE
   done
   printf "\n" >> $OUTFILE
-  for i in 1 2 4 12 23 24 31 32 36 47 48
+  for i in 1 2 4 8 16 24 32 48 64
   do
     printf "$i" >> $OUTFILE
     for k in {1..5}
