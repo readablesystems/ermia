@@ -1,11 +1,11 @@
 #!/bin/bash
 
 if [ ! -d build ]; then
-	mkdir build
-	cd build
-	cmake ../ -DCMAKE_BUILD_TYPE=Release
+  mkdir build
+  cd build
+  cmake ../ -DCMAKE_BUILD_TYPE=Release
   make -j
-	cd ..
+  cd ..
 fi
 
 cd build
