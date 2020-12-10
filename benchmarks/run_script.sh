@@ -9,7 +9,7 @@ do
     printf ",ERMIA (W$w) [T$k]" >> $OUTFILE
   done
   printf "\n" >> $OUTFILE
-  for i in 1 2 4 8 16 24 32 48 64
+  for i in 1 2 4 12 24 32 40 48 64
   do
     printf "$i" >> $OUTFILE
     for k in {1..5}
